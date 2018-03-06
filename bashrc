@@ -1,6 +1,7 @@
 #-------------------
-# Personnal Aliases
+# Personnal Space
 #-------------------
+
 export PATH=$PATH:/usr/lib/nagios/plugins/
 export PATH=$PATH:/usr/lib/nagios/plugins/libexec/
 export GREP_COLOR='0;35'
@@ -17,7 +18,8 @@ alias nc="nc -v -w 5"
 alias pwd="pwd -P"
 alias cls="clear"
 alias ssh="ssh -v"
-alias ps="ps ax -o user,pid,%cpu,%mem,bsdtime,command"
+who=`/usr/bin/whoami`
+date=`date +%d%m%Y`
 
 PS1="|\[\e[34m\]\A:\[\e[32m\]\h:\[\e[33m\]:\[\e[36m\]\u:\[\e[35m\]\w:\[\e[31m\]\$?\[\e[0m\]:>> "
 
@@ -29,6 +31,17 @@ whatmypubIP()
 whatmypvtIP()
 {
         /usr/bin/curl -s ifconfig.me/forwarded
+}
+
+cpf()
+{
+        if [ ! -d "/home/$who/backup" ]; 
+        then
+                echo -e "\t\tBackup directory is missing.."
+                mkdir -vp /home/$who/backup
+        fi
+
+        /bin/cp -v $1 /home/$who/backup/$1-$date.bak
 }
 
 function extract()
