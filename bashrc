@@ -26,6 +26,7 @@ PS1="|\[\e[34m\]\A:\[\e[32m\]\h:\[\e[33m\]:\[\e[36m\]\u:\[\e[35m\]\w:\[\e[31m\]\
 kbtomb()
 {
         echo $1 | awk '{ size = $1 / 1024 / 1024 ; print size "MB" }'
+}
 
 whatmypubIP()
 {
