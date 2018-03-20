@@ -23,6 +23,10 @@ date=`date +%d%m%Y`
 
 PS1="|\[\e[34m\]\A:\[\e[32m\]\h:\[\e[33m\]:\[\e[36m\]\u:\[\e[35m\]\w:\[\e[31m\]\$?\[\e[0m\]:>> "
 
+kbtomb()
+{
+        echo $1 | awk '{ size = $1 / 1024 / 1024 ; print size "MB" }'
+
 whatmypubIP()
 {
         /usr/bin/dig +short myip.opendns.com @resolver1.opendns.com
