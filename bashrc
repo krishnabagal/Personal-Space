@@ -17,7 +17,6 @@ alias ..5="cd ../../../../.."
 alias nc="nc -v -w 5"
 alias pwd="pwd -P"
 alias cls="clear"
-alias ssh="ssh -v"
 who=`/usr/bin/whoami`
 date=`date +%d%m%Y`
 
@@ -49,6 +48,12 @@ cpf()
         /bin/cp -v $1 /home/$who/backup/$1-$date.bak
 }
 
+killbyobu()
+{
+        PIDofBYOBU=`ps auxf |grep -i "[b]yobu"|tail -1 |awk {'print $2'}`
+        kill -9 $PIDofBYOBU
+}
+
 function extract()
 {
     if [ -f $1 ] ; then
@@ -71,8 +76,12 @@ function extract()
     fi
 }
 
-genpas() {
+genpass() {
         local l=$1
         [ "$l" == "" ] && l=16
         tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+}
+
+convertword() {
+        tr a-z@. n-za-m.@ <<< $1
 }
