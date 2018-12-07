@@ -1,11 +1,10 @@
 #-------------------
 # Personnal Space
 #-------------------
-
 export PATH=$PATH:/usr/lib/nagios/plugins/
 export PATH=$PATH:/usr/lib/nagios/plugins/libexec/
-export GREP_COLOR='0;35'
-export GREP_OPTIONS='--color=auto'
+export HISTTIMEFORMAT='%F %T :> '
+export HISTSIZE=5000
 alias cp='cp -apvri'
 alias mv='mv -v'
 alias df='df -Th'
@@ -19,8 +18,10 @@ alias pwd="pwd -P"
 alias cls="clear"
 who=`/usr/bin/whoami`
 date=`date +%d%m%Y`
+pvtipps1=`ip route get 1 | awk '{print $NF;exit}'`
+hostnameps1=`hostname -f |cut -d. -f1,2`
 
-PS1="|\[\e[34m\]\A:\[\e[32m\]\h:\[\e[33m\]:\[\e[36m\]\u:\[\e[35m\]\w:\[\e[31m\]\$?\[\e[0m\]:>> "
+PS1="|\[\e[33m\]\A:\[\e[32m\]\$hostnameps1:\[\e[34m\]$pvtipps1:\[\e[36m\]\u:\[\e[35m\]\w:\[\e[31m\]\$?\[\e[0m\]:>> "
 
 kbtomb()
 {
@@ -36,6 +37,10 @@ whatmypvtIP()
 {
         /usr/bin/curl -s ifconfig.me/forwarded
 }
+greptomcat()
+{
+        sudo /bin/ps auxf |egrep -i "[f]ile=" |grep -i tomcat |cut -d "=" -f2 |cut -d/ -f1,2,3
+}
 
 cpf()
 {
@@ -45,13 +50,7 @@ cpf()
                 mkdir -vp /home/$who/backup
         fi
 
-        /bin/cp -v $1 /home/$who/backup/$1-$date.bak
-}
-
-killbyobu()
-{
-        PIDofBYOBU=`ps auxf |grep -i "[b]yobu"|tail -1 |awk {'print $2'}`
-        kill -9 $PIDofBYOBU
+        sudo /bin/cp -v $1 /home/$who/backup/$1-$date.bak
 }
 
 function extract()
