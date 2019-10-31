@@ -17,7 +17,7 @@ alias nc="nc -v -w 5"
 alias pwd="pwd -P"
 alias cls="clear"
 who=`/usr/bin/whoami`
-date=`date +%d%m%Y`
+date=`date +%d%m%Y%H%M%S`
 pvtipps1=`ip route get 1 | awk '{print $NF;exit}'`
 hostnameps1=`hostname -f |cut -d. -f1,2`
 
